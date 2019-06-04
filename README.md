@@ -74,13 +74,13 @@ in a 64x64x16 cuboid.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/r
 
 The code has been written with OOP and enables you to train CT-GAN for injection and/or removal. This repo contains example scripts for perfoming every step of CT-GAN, and the primary source code (found in the 'procedures' directory). To configure CT-GAN and its inputs, you must change the contents of [config.py](config.py) accordingly (see below for details)
 Example scripts for running CT-GAN are in the main directory:
-* 1A_build_injector_trainset.py	: Builds a preprocessed training dataset from a set of medical scans for the purpose of injecting evidence. 
-* 1B_build_remover_trainset.py	: Builds a preprocessed training dataset from a set of medical scans for the purpose of removing evidence. 
-* 2A_train_injector.py			: Trains the injection cGAN to perform in-painting using the extracted dataset. 
-* 2B_train_remover.py			: Trains the removal cGAN to perform in-painting using the extracted dataset. 
-* 3A_inject_evidence.py			: Injects evidence into a given scan at the given coordinates (you must change the hard-coded paths and values in script). 
-* 3B_remove_evidence.py			: Removes evidence from a given scan at the given coordinates (you must change the hard-coded paths and values in script). 
-* tamper.py						: An all-in-one command-line tool for tampering scans given the trained model(s). 
+* **1A_build_injector_trainset.py**	: Builds a preprocessed training dataset from a set of medical scans for the purpose of injecting evidence. 
+* **1B_build_remover_trainset.py**	: Builds a preprocessed training dataset from a set of medical scans for the purpose of removing evidence. 
+* **2A_train_injector.py**			: Trains the injection cGAN to perform in-painting using the extracted dataset. 
+* **2B_train_remover.py**			: Trains the removal cGAN to perform in-painting using the extracted dataset. 
+* **3A_inject_evidence.py**			: Injects evidence into a given scan at the given coordinates (you must change the hard-coded paths and values in script). 
+* **3B_remove_evidence.py**			: Removes evidence from a given scan at the given coordinates (you must change the hard-coded paths and values in script). 
+* **tamper.py**						: An all-in-one command-line tool for tampering scans given the trained model(s). 
 
 
 ## Implementation Notes: 
