@@ -18,7 +18,7 @@ add or remove evidence of some medical condition. The figure below illustrates t
 ![An illustration of the attack vector within a hostpital.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/attackvec.png)
 
 There are many reasons why an attacker would want to
-alter medical imagery: to disrupt a [political] leader's life, perform ransomware, an act of insurance fraud, falsifying research evidence, sabotaging another company’s research, job theft,
+alter medical imagery: to disrupt a [political] leader's life, perform ransomware, an act of insurance fraud, falsifying research evidence, sabotaging another companyâ€™s research, job theft,
 terrorism, assassination, and even murder.
 
 CT-GAN is a framework for automatically injecting and removing medical evidence from 3D medical scans such as those produced from CT and MRI. The framework consists of two conditional GANs
@@ -70,19 +70,17 @@ in a 64x64x16 cuboid.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/r
 * during the tampering process, we scale (interpolate) the entire scan as opposed to just the candidate location (cuboid). This means tampering takes longer to process than necessary.
 
 
-
-
 # The CT-GAN Code
 
 The code has been written with OOP and enables you to train CT-GAN for injection and/or removal. This repo contains example scripts for perfoming every step of CT-GAN, and the primary source code (found in the 'procedures' directory). To configure CT-GAN and its inputs, you must change the contents of [config.py](config.py) accordingly (see below for details)
 Example scripts for running CT-GAN are in the main directory:
--1A_build_injector_trainset.py	: Builds a preprocessed training dataset from a set of medical scans for the purpose of injecting evidence. 
--1B_build_remover_trainset.py	: Builds a preprocessed training dataset from a set of medical scans for the purpose of removing evidence. 
--2A_train_injector.py			: Trains the injection cGAN to perform in-painting using the extracted dataset. 
--2B_train_remover.py			: Trains the removal cGAN to perform in-painting using the extracted dataset. 
--3A_inject_evidence.py			: Injects evidence into a given scan at the given coordinates (you must change the hard-coded paths and values in script). 
--3B_remove_evidence.py			: Removes evidence from a given scan at the given coordinates (you must change the hard-coded paths and values in script). 
--tamper.py						: An all-in-one command-line tool for tampering scans given the trained model(s). 
+* 1A_build_injector_trainset.py	: Builds a preprocessed training dataset from a set of medical scans for the purpose of injecting evidence. 
+* 1B_build_remover_trainset.py	: Builds a preprocessed training dataset from a set of medical scans for the purpose of removing evidence. 
+* 2A_train_injector.py			: Trains the injection cGAN to perform in-painting using the extracted dataset. 
+* 2B_train_remover.py			: Trains the removal cGAN to perform in-painting using the extracted dataset. 
+* 3A_inject_evidence.py			: Injects evidence into a given scan at the given coordinates (you must change the hard-coded paths and values in script). 
+* 3B_remove_evidence.py			: Removes evidence from a given scan at the given coordinates (you must change the hard-coded paths and values in script). 
+* tamper.py						: An all-in-one command-line tool for tampering scans given the trained model(s). 
 
 
 ## Implementation Notes: 
@@ -170,7 +168,7 @@ and/or
 $ python 2B_train_remover.py
 ```
 This code will use the preprocessed dataset you have created in step 1A/1B and the setting in [config.py](config.py) to train the generator models.
-Snapshots of the progress are saved to a local ‘images’ directory in png format (default is after every 50 batches). For example:
+Snapshots of the progress are saved to a local â€˜imagesâ€™ directory in png format (default is after every 50 batches). For example:
 
 ![Example progress snapshot after 50 batches while training the injector.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/0_50.png)
 
