@@ -15,10 +15,10 @@ medical services. An attacker with access to medical imagery can alter the
 contents to cause a misdiagnosis. Concretely, the attacker can
 add or remove evidence of some medical condition. The figure below illustrates this attack vector.
 
-![An illustration of the attack vector within a hostpital.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/attackvec.png | width=400)
+![An illustration of the attack vector within a hostpital.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/attackvec.png)
 
 There are many reasons why an attacker would want to
-alter medical imagery: to disrupt a [political] leader's life, perform ransomware, an act of insurance fraud, falsifying research evidence, sabotaging another companyâ€™s research, job theft,
+alter medical imagery: to disrupt a [political] leader's life, perform ransomware, an act of insurance fraud, falsifying research evidence, sabotaging another company’s research, job theft,
 terrorism, assassination, and even murder.
 
 CT-GAN is a framework for automatically injecting and removing medical evidence from 3D medical scans such as those produced from CT and MRI. The framework consists of two conditional GANs
@@ -49,10 +49,10 @@ The cGAN architecture (layers and configurations) used for training the injector
 
 
 ## Sample results
-![Top: 3D models of injection (left) and removal (right) of a cancerous pulmonary lung nodule. Bottom: sample injections (left) and removals (right), where for each image, the left side is before tampering and the right side is after and only the middle 2D slice is shown.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/cancersamples.png | width=600)
+![Top: 3D models of injection (left) and removal (right) of a cancerous pulmonary lung nodule. Bottom: sample injections (left) and removals (right), where for each image, the left side is before tampering and the right side is after and only the middle 2D slice is shown.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/cancersamples.png)
 
 ![CT-GAN used to inject brain tumors into MRIs of healthy brains. Top: context, middle: in-painted result, and bottom: ground-truth. Showing one slice
-in a 64x64x16 cuboid.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/braintrain.png | width=600)
+in a 64x64x16 cuboid.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/braintrain.png)
 
 [![Demo video](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/demovid.png)](https://youtu.be/_mkRAArj-x0)
 
@@ -170,7 +170,7 @@ and/or
 $ python 2B_train_remover.py
 ```
 This code will use the preprocessed dataset you have created in step 1A/1B and the setting in [config.py](config.py) to train the generator models.
-Snapshots of the progress are saved to a local â€˜imagesâ€™ directory in png format (default is after every 50 batches). For example:
+Snapshots of the progress are saved to a local ‘images’ directory in png format (default is after every 50 batches). For example:
 
 ![Example progress snapshot after 50 batches while training the injector.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/0_50.png)
 
