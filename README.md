@@ -15,7 +15,7 @@ medical services. An attacker with access to medical imagery can alter the
 contents to cause a misdiagnosis. Concretely, the attacker can
 add or remove evidence of some medical condition. The figure below illustrates this attack vector.
 
-![An illustration of the attack vector within a hostpital.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/attackvector.png)
+![An illustration of the attack vector within a hostpital.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/attackvec.png)
 
 There are many reasons why an attacker would want to
 alter medical imagery: to disrupt a [political] leader's life, perform ransomware, an act of insurance fraud, falsifying research evidence, sabotaging another company’s research, job theft,
@@ -34,7 +34,7 @@ realistic, CT-GAN perform the following steps when tampering a scan, the framewo
 3. interpolates (scales) the cuboid to 1:1:1 ratio,
 4. modifies the cuboid with the respective cGAN,
 5. rescales the cuboid back to the original ratio,
-6, pastes the scaled and tampered cuboid back into the original scan
+6. pastes the scaled and tampered cuboid back into the original scan
 
 ![Top: the complete cancer injection/removal process. Bottom: sample images from the injection process. The grey numbers indicate from which step the image was taken. The sample 2D images are the middle slice of the respective 3D cuboid.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/pipeline.png)
 
@@ -44,26 +44,30 @@ by processing fewer inputs (voxels) and concepts (anatomical features). This res
 
 ## The cGAN (pix2pix) architecture
 The cGAN architecture (layers and configurations) used for training the injector and remover generator networks is illustrated below. Overall, each cGAN has 189.5 million trainable parameters each.
+
 ![The network architecture, layers, and parameters used for both the injection and removal GAN networks.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/arch.png)
 
 
 ## Sample results
-![Top: 3D models of injection (left) and removal (right) of a cancerous pulmonary lung nodule. Bottom: sample injections (left) and removals (right), where for
-each image, the left side is before tampering and the right side
-is after and only the middle 2D slice is shown.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/cancerexamples.png)
+![Top: 3D models of injection (left) and removal (right) of a cancerous pulmonary lung nodule. Bottom: sample injections (left) and removals (right), where for each image, the left side is before tampering and the right side is after and only the middle 2D slice is shown.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/cancersamples.png)
+
 ![CT-GAN used to inject brain tumors into MRIs of healthy brains. Top: context, middle: in-painted result, and bottom: ground-truth. Showing one slice
 in a 64x64x16 cuboid.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/braintrain.png)
+
 [![Demo video](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/demovid.png)](https://youtu.be/_mkRAArj-x0)
 
 
 ## This version's features and limitations
 **Features**
--build normalized/preprocessed training dataset from mhd/raw and dicom medical scans.
--train the injection and removal networks 
--inject and remove evidence from mhd/raw and dicom scans
+
+* build normalized/preprocessed training dataset from mhd/raw and dicom medical scans.
+* train the injection and removal networks 
+* inject and remove evidence from mhd/raw and dicom scans
+
 **Limitations**
--this version will not automatically locate candicate injection/removal locations within a target scan. 
--during the tampering process, we scale (interpolate) the entire scan as opposed to just the candidate location (cuboid). This means tampering takes longer to process than necessary.
+
+* this version will not automatically locate candicate injection/removal locations within a target scan. 
+* during the tampering process, we scale (interpolate) the entire scan as opposed to just the candidate location (cuboid). This means tampering takes longer to process than necessary.
 
 
 
@@ -92,20 +96,20 @@ Example scripts for running CT-GAN are in the main directory:
 
 To install the dependencies, run this in the terminal:
 ```
-upgrade
 pip install --upgrade scipy matplotlib pandas tensorflow keras SimpleITK pydicom
 ```
  
 ## Coordinate Systems
-Coordinates in a medical scans can be denoted using world coordinates or image (voxel) coordinates. In order to use CT-GAN you need to be familiar with the difference between these systems. [([source](https://www.slicer.org/wiki/Coordinate_systems))]
+Coordinates in a medical scans can be denoted using world coordinates or image (voxel) coordinates. In order to use CT-GAN you need to be familiar with the difference between these systems. [[source](https://www.slicer.org/wiki/Coordinate_systems)]
+
 ![The difference between world and image (voxel) coordinate systems.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/coordinate_systems.png)
 
 ### World Coordinate System
 The world coordinate system is typically a Cartesian coordinate system in which a model (e.g. a MRI scanner or a patient) is positioned. Every model has its own coordinate system but there is only one world coordinate system to define the position and orientation of each model.
 ### Image (Voxel) Coordinate System
 A voxel represents a value on a regular grid in three-dimensional space (like 3D pixels). The voxel coordinate system describes how an image was acquired with respect to the anatomy. Medical scanners create regular, rectangular arrays of points and cells which start at the upper left corner. The x axis increases to the right, the y axis to the bottom and the z axis backwards. In addition to the intensity value of each voxel (x y z) the origin and spacing of the anatomical coordinates are stored too. You can also think of the system as indexes of a 3D array.
--The origin represents the position of the first voxel (0,0,0) in the anatomical coordinate system, e.g. (100mm, 50mm, -25mm)
--The spacing specifies the distance between voxels along each axis, e.g. (1.5mm, 0.5mm, 0.5mm)
+* The origin represents the position of the first voxel (0,0,0) in the anatomical coordinate system, e.g. (100mm, 50mm, -25mm)
+* The spacing specifies the distance between voxels along each axis, e.g. (1.5mm, 0.5mm, 0.5mm)
 
 The code supports both coordinate systems, you just need to indicate which one you are using when supplying coordinates (in (config.py)[config.py] and via the function call itself).
 
@@ -153,6 +157,7 @@ To build a training set for removing evidence, run
 $ python 1B_build_remover_trainset.py
 ```
 Once extraction is complete you will be shown a plot containing some samples:
+
 ![Example plot shown after extraction showing random instances extracted (middle slice only).](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/extractor_fig.png)
 
 ### Step 2: Train the cGANs
@@ -166,6 +171,7 @@ $ python 2B_train_remover.py
 ```
 This code will use the preprocessed dataset you have created in step 1A/1B and the setting in [config.py](config.py) to train the generator models.
 Snapshots of the progress are saved to a local ‘images’ directory in png format (default is after every 50 batches). For example:
+
 ![Example progress snapshot after 50 batches while training the injector.](https://raw.githubusercontent.com/ymirsky/CT-GAN/master/readme/0_50.png)
 
  
