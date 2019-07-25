@@ -281,7 +281,7 @@ class Trainer:
         cnt = 0
         for i in range(r):
             for j in range(c):
-                axs[i, j].imshow(gen_imgs[cnt].reshape((self.img_rows, self.img_cols, self.img_depth))[16, :, :])
+                axs[i, j].imshow(gen_imgs[cnt].reshape((self.img_depth, self.img_rows, self.img_cols))[int(self.img_depth/2), :, :])
                 axs[i, j].set_title(titles[i])
                 axs[i, j].axis('off')
                 cnt += 1
