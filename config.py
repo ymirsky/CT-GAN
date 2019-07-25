@@ -35,9 +35,9 @@ config['mask_ylims'] = np.array([6,26])
 config['mask_zlims'] = np.array([6,26])
 config['copynoise'] = True #If true, the noise touch-up is copied onto the tampered region from a hardcoded coordinate. If false, gaussain interpolated noise is added instead
 
-if config['mask_xlims'][1] > config['cube_shape'][0]:
+if config['mask_zlims'][1] > config['cube_shape'][0]:
     raise Exception('Out of bounds: cube mask is larger then cube on dimension z.')
-if config['mask_xlims'][1] > config['cube_shape'][1]:
+if config['mask_ylims'][1] > config['cube_shape'][1]:
     raise Exception('Out of bounds: cube mask is larger then cube on dimension y.')
-if config['mask_ylims'][1] > config['cube_shape'][2]:
+if config['mask_xlims'][1] > config['cube_shape'][2]:
     raise Exception('Out of bounds: cube mask is larger then cube on dimension x.')
