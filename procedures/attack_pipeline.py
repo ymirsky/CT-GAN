@@ -41,7 +41,7 @@ class scan_manipulator:
     def __init__(self,isInjector=True):
         print("===Init Tamperer===")
         self.scan = None
-        self.malscan_resized = None # temporary storage for tamepring until time to scale back down
+        self.mal_scan_resized = None # temporary storage for tamepring until time to scale back down
         self.isInjector = isInjector
         self.load_path = None
         self.m_zlims = config['mask_zlims']
