@@ -41,3 +41,11 @@ if config['mask_ylims'][1] > config['cube_shape'][1]:
     raise Exception('Out of bounds: cube mask is larger then cube on dimension y.')
 if config['mask_xlims'][1] > config['cube_shape'][2]:
     raise Exception('Out of bounds: cube mask is larger then cube on dimension x.')
+
+# Make save directories
+if not os.path.exists(config['modelpath_inject']):
+    os.makedirs(config['modelpath_inject'])
+if not os.path.exists(config['modelpath_remove']):
+    os.makedirs(config['modelpath_remove'])
+if not os.path.exists(config['progress']):
+    os.makedirs(config['progress'])
