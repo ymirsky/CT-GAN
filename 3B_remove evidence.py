@@ -12,7 +12,7 @@ injector.load_target_scan('path_to_target_scan')
 vox_coord1 = np.array([53,213,400]) #z, y , x (x-y should be flipped if the coordinates were obtained from an image viewer such as RadiAnt)
 vox_coord2 = np.array([33,313,200])
 injector.tamper(vox_coord1, isVox=True) #can supply realworld coord too
-injector.tamper(vox_coord1, isVox=True)
+injector.tamper(vox_coord2, isVox=True)
 
 # Save scan
 injector.save_tampered_scan('path_to_save_scan',output_type='dicom') #output can be dicom iff input was dicom, otherwise only numpy save is supported
