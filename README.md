@@ -1,7 +1,7 @@
 # Overview
 In this repository you will find a Keras implementation of CT-GAN: A framework for adding or removing evidence in 3D volumetric medical scans. In this readme, you will find a description of CT-GAN, examples of how to use the code, and links to our tampered datasets. For more details, please see our publication:
 
-*Yisroel Mirsky, Tom Mahler, Ilan Shelef, and Yuval Elovici. 28th USENIX Security Symposium (USENIX Security 19)*
+*Yisroel Mirsky, Tom Mahler, Ilan Shelef, and Yuval Elovici. CT-GAN: Malicious Tampering of 3D Medical Imagery using Deep Learning. 28th USENIX Security Symposium (USENIX Security 19)*
 
 ([full paper here](https://arxiv.org/abs/1901.03597))
 
