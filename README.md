@@ -116,7 +116,7 @@ A voxel represents a value on a regular grid in three-dimensional space (like 3D
 * The origin represents the position of the first voxel (0,0,0) in the anatomical coordinate system, e.g. (100mm, 50mm, -25mm)
 * The spacing specifies the distance between voxels along each axis, e.g. (1.5mm, 0.5mm, 0.5mm)
 
-The code supports both coordinate systems, you just need to indicate which one you are using when supplying coordinates (in (config.py)[config.py] and via the function call itself).
+The code supports both coordinate systems, you just need to indicate which one you are using when supplying coordinates (in [config.py](config.py) and via the function call itself).
 
 
 ## Using the Code
@@ -216,7 +216,7 @@ optional arguments:
   -s {vox,world}, --system {vox,world}
                         Indicate the coordinate system of the supplied target coordinates: 'vox' or 'world'. Default is 'vox'.
   -f {dicom,numpy}, --outformat {dicom,numpy}
-                        The output format to save the tamepred scan: 'dicom' or 'numpy'. Note, dicom is only avaliable if the target scan was dicom.  Default is 'dicom'.
+                        The output format to save the tamepred scan: 'dicom' or 'numpy'. Default is 'dicom'.
 
 To change other settings, check config.py
 Note, this version is significantly slower since it will scale (interpolate) the entire scan and not just the target cuboid. For more information, please read our paper:
