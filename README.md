@@ -3,7 +3,7 @@ In this repository you will find a Keras implementation of CT-GAN: A framework f
 
 *Yisroel Mirsky, Tom Mahler, Ilan Shelef, and Yuval Elovici. CT-GAN: Malicious Tampering of 3D Medical Imagery using Deep Learning. 28th USENIX Security Symposium (USENIX Security 19)*
 
-([full paper here](https://arxiv.org/abs/1901.03597))
+([full paper here](https://www.usenix.org/system/files/sec19-mirsky_0.pdf))
 
 **Disclaimer**: This code has been published for research purposes only. It is our hope that with this code, others will be able to better understand this threat and find better ways to mitigate it.
  
@@ -73,8 +73,7 @@ in a 64x64x16 cuboid:*
 
 **Limitations**
 
-* this version will not automatically locate candicate injection/removal locations within a target scan. 
-* during the tampering process, we scale (interpolate) the entire scan as opposed to just the candidate location (cuboid). This means tampering takes longer to process than necessary.
+* this version will not automatically locate candicate injection/removal locations within a target scan. Please see our paper for details on this algorithm.
 
 
 # The CT-GAN Code
@@ -219,7 +218,7 @@ optional arguments:
                         The output format to save the tamepred scan: 'dicom' or 'numpy'. Default is 'dicom'.
 
 To change other settings, check config.py
-Note, this version is significantly slower since it will scale (interpolate) the entire scan and not just the target cuboid. For more information, please read our paper:
+For more information, please read our paper:
 CT-GAN: Malicious Tampering of 3D Medical Imagery using Deep Learning.
 Yisroel Mirsky, Tom Mahler, Ilan Shelef, and Yuval Elovici
 
@@ -239,11 +238,17 @@ If you use the source code in any way, please cite:
 
 *Yisroel Mirsky, Tom Mahler, Ilan Shelef, and Yuval Elovici. 28th USENIX Security Symposium (USENIX Security 19)*
 ```
-@inproceedings{mirsky2019ct,
-  title={CT-GAN: Malicious Tampering of 3D Medical Imagery using Deep Learning},
-  author={Mirsky, Yisroel and Mahler, Tom and Shelef, Ilan and Elovici, Yuval},
-  booktitle={28th USENIX Security Symposium (USENIX Security 19)},
-  year={2019}
+@inproceedings {236284,
+author = {Yisroel Mirsky and Tom Mahler and Ilan Shelef and Yuval Elovici},
+title = {CT-GAN: Malicious Tampering of 3D Medical Imagery using Deep Learning},
+booktitle = {28th {USENIX} Security Symposium ({USENIX} Security 19)},
+year = {2019},
+isbn = {978-1-939133-06-9},
+address = {Santa Clara, CA},
+pages = {461--478},
+url = {https://www.usenix.org/conference/usenixsecurity19/presentation/mirsky},
+publisher = {{USENIX} Association},
+month = aug,
 }
 ```
 

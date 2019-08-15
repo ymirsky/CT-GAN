@@ -21,8 +21,11 @@
 # SOFTWARE.
 
 from __future__ import print_function, division
-
 from config import *  # user configuration in config.py
+import os
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+os.environ["CUDA_VISIBLE_DEVICES"] = config['gpus']
+
 from utils.dataloader import DataLoader
 from keras.layers import Input, Dropout, Concatenate, Cropping3D
 from keras.layers import BatchNormalization
@@ -31,12 +34,8 @@ from keras.layers.convolutional import UpSampling3D, Conv3D
 from keras.models import Model
 from keras.optimizers import Adam
 import matplotlib.pyplot as plt
-from utils.equalizer import *
 import datetime
 import numpy as np
-import os
-
-os.environ["CUDA_VISIBLE_DEVICES"] = config['gpus']
 
 import tensorflow as tf
 import keras.backend.tensorflow_backend as ktf

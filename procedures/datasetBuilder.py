@@ -40,7 +40,7 @@ class Extractor:
     #   if filename has the *.mhd extension, then mhd/raw is assumed (all mdh/raw files should be in same directory)
     #parallelize: inidates whether the processign should be run over multiple CPU cores
     #coordSystem: if the coords are the matrix indexes, then choose 'vox'. If the coords are realworld locations, then choose 'world'
-    def __init__(self, is_healthy_dataset, src_dir=None, coords_csv_path=None, dst_path=None, norm_save_dir=None, parallelize=True, coordSystem=None):
+    def __init__(self, is_healthy_dataset, src_dir=None, coords_csv_path=None, dst_path=None, norm_save_dir=None, parallelize=False, coordSystem=None):
         self.parallelize = parallelize
         if coordSystem is None:
             self.coordSystem = config['traindata_coordSystem']
@@ -74,7 +74,10 @@ class Extractor:
         else:
             X = []
             for job in J:
-                X.append(self._processJob(job))
+                try:
+                    X.append(self._processJob(job))
+                except:
+                    print("Failed to process sample")
         instances = np.array(list(itertools.chain.from_iterable(X))) #each job creates a batch of augmented instances: so collect hem
 
         # Histogram Equalization:
@@ -111,23 +114,24 @@ class Extractor:
         # load scan data
         scan, spacing, orientation, origin, raw_slices = load_scan(scan_path)
         # scale the image
-        scan_resized, resize_factor = scale_scan(scan, spacing)
+        #scan_resized, resize_factor = scale_scan(scan, spacing)
         # compute sample coords as vox
         if coordSystem == 'world': #convert from world to vox
             coord = world2vox(coord,spacing,orientation,origin)
         elif coordSystem != 'vox':
             raise Exception("Coordinate conversion error: you can only select world or vox")
-        coordn = scale_vox_coord(coord, spacing)  # ccord relative to scaled scan
+        #coordn = scale_vox_coord(coord, spacing)  # ccord relative to scaled scan
 
         # extract instances
         X = []
-        init_cube_size = cube_shape + 8 # add extra borders for augmentations
-        x = cutCube(scan_resized, coordn, init_cube_size, padd=-1000)  # cut out cancer with extra boundry
+        init_cube_shape = get_scaled_shape(cube_shape + 8, 1/spacing)
+        clean_cube_unscaled = cutCube(scan, coord, init_cube_shape, padd=-1000)
+        x, resize_factor = scale_scan(clean_cube_unscaled,spacing)
         # perform data augmentations to generate more instances
         Xaug = self._augmentInstance(x)
         # trim the borders to get the actual desired shape
         for xa in Xaug:
-            center = np.array(init_cube_size/2, dtype=int)
+            center = np.array(x.shape)//2
             X.append(cutCube(xa, center, cube_shape, padd=-1000))  # cut out  augmented cancer without extra boundry
         return X
 
@@ -157,7 +161,6 @@ class Extractor:
 
     def plot_sample(self,X):
         import matplotlib.pyplot as plt
-        plt.ion()
         r, c = 3, 10
         batch = X[np.random.permutation(len(X))[:30]]
         fig, axs = plt.subplots(r, c, figsize=np.array([30, 10]) * .5)

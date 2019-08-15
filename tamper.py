@@ -34,20 +34,20 @@ if __name__ == '__main__':
     parser.add_argument('-a','--action', choices=['inject','remove'], required=True, help="The directory (path) to save the tampered scan.")
     parser.add_argument('-c','--coord', required=True,nargs='*',help="The selected coordinate(s) in the target scan to inject evidence. You must provide one or more coordinates in z,y,x format with no spaces. \nExample (inject at two locations): python tamper.py -t patient.mhd -d outdir -c 123,324,401 53,201,441")
     parser.add_argument('-s', '--system', choices=['vox','world'], default='vox',help="Indicate the coordinate system of the supplied target coordinates: 'vox' or 'world'. Default is 'vox'.")
-    parser.add_argument('-f', '--outformat',choices=['dicom','numpy'],default='dicom',help="The output format to save the tamepred scan: 'dicom' or 'numpy'. Note, dicom is only avaliable if the target scan was dicom.  Default is 'dicom'.")
+    parser.add_argument('-f', '--outformat',choices=['dicom','numpy'],default='dicom',help="The output format to save the tamepred scan: 'dicom' or 'numpy'. Default is 'dicom'.")
     args = parser.parse_known_args()[0]
 
     from procedures.attack_pipeline import *
 
     # Init pipeline
-    injector = scan_manipulator(isInjector = (args.action=='inject'))
+    injector = scan_manipulator()
 
     # Load target scan (provide path to dcm file/dir, or mhd file)
     injector.load_target_scan(load_path=args.target)#('path_to_target_scan')
 
     for coord in args.coord:
         coorda = np.array(coord.split(','),dtype=float)
-        injector.tamper(coorda, isVox=(args.system=='vox'))
+        injector.tamper(coorda, action=args.action, isVox=(args.system=='vox'))
 
     # Save scan
     injector.save_tampered_scan(save_dir=args.destination,output_type=args.outformat) #output can be dicom iff input was dicom, otherwise only numpy save is supported

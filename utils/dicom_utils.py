@@ -70,6 +70,32 @@ def save_dicom(scan, origional_raw_slices, dst_directory): # \\dfds\\ format
         slice.PixelData = slice.pixel_array.tobytes()
         slice.save_as(os.path.join(dst_directory,slice.filename))#.dcmwrite(os.path.join(dst_directory,slice.filename),slice)
 
+#img_array: 3d numpy matrix, z,y,x
+def toDicom(save_dir, img_array,  pixel_spacing, orientation):
+    ref_scan = pydicom.read_file('utils/ref_scan.dcm') #slice from soem real scan so we can copy the meta data
+
+    #write dcm file for each slice in scan
+    for i, slice in enumerate(img_array):
+        ref_scan.pixel_array.flat = img_array[i,:,:].flat
+        ref_scan.PixelData = ref_scan.pixel_array.tobytes()
+        ref_scan.RefdSOPInstanceUID = str(i)
+        ref_scan.SOPInstanceUID = str(i)
+        ref_scan.InstanceNumber = str(i)
+        ref_scan.SliceLocation = str(i)
+        ref_scan.ImagePositionPatient[2] = str(i*pixel_spacing[0])
+        ref_scan.RescaleIntercept = 0
+        ref_scan.Rows = img_array.shape[1]
+        ref_scan.Columns = img_array.shape[2]
+        ref_scan.PixelSpacing = [str(pixel_spacing[2]),str(pixel_spacing[1])]
+        ref_scan.SliceThickness = pixel_spacing[0]
+        #Pixel Spacing                       DS: ['0.681641', '0.681641']
+        #Image Position (Patient)            DS: ['-175.500000', '-174.500000', '49']
+        #Image Orientation (Patient)         DS: ['1.000000', '0.000000', '0.000000', '0.000000', '1.000000', '0.000000']
+        #Rows                                US: 512
+        #Columns                             US: 512
+        os.makedirs(save_dir,exist_ok=True)
+        ref_scan.save_as(os.path.join(save_dir,str(i)+'.dcm'))
+
 def scale_scan(scan,spacing,factor=1):
     resize_factor = factor * spacing
     new_real_shape = scan.shape * resize_factor
@@ -78,6 +104,11 @@ def scale_scan(scan,spacing,factor=1):
     new_spacing = spacing / real_resize_factor
     scan_resized = scipy.ndimage.interpolation.zoom(scan, real_resize_factor, mode='nearest')
     return scan_resized, resize_factor
+
+# get the shape of an orthotope in 1:1:1 ratio AFTER scaling to the given spacing
+def get_scaled_shape(shape, spacing):
+    new_real_shape = shape * spacing
+    return np.round(new_real_shape).astype(int)
 
 def scale_vox_coord(coord, spacing, factor=1):
     resize_factor = factor * spacing

@@ -2,7 +2,7 @@ from procedures.datasetBuilder import *
 
 # Init dataset builder for creating a dataset of evidence to inject
 print('Initializing Dataset Builder for Evidence Removal')
-builder = Extractor(is_healthy_dataset=True, parallelize=True)
+builder = Extractor(is_healthy_dataset=True, parallelize=False)
 
 # Extract training instances
 # Source data location and save location is loaded from config.py
