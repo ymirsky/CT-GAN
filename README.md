@@ -87,7 +87,7 @@ Example scripts for running CT-GAN are in the main directory:
 * **3A_inject_evidence.py**			: Injects evidence into a given scan at the given coordinates (you must change the hard-coded paths and values in script). 
 * **3B_remove_evidence.py**			: Removes evidence from a given scan at the given coordinates (you must change the hard-coded paths and values in script). 
 * **tamper.py**						: An all-in-one command-line tool for tampering scans given the trained model(s). 
-
+* **GUI.py**						: An interactive GUI for point and click scan tampering 
 
 ## Implementation Notes: 
 
@@ -192,7 +192,13 @@ $ python 3B_remove_evidence.py
 ```
 This code will load a scan, inject/remove evidence at the provided coordinates, and then save the tampered scan. Here, the load/save locations along with the target coordinates must be changed within the example script (not via config.py). Be sure to note which coordinate system you are using.
 
-For easier use, there is a command-line tool 'tamper.py' which can be used to inject/remove evidence using your trained models. For ehlp using this tool, run
+For easier use, there is an interactive GUI which can be used to scroll through scans and tamper them by clicking on the Image. The results can also be saved in dicom format. To use this tool, run
+```
+$python GUI.py load_dir save_dir
+```
+If the load directory is not supplied then the data/healthy_scans directory is used. The save directory is data/tampered_scans unless specified.
+
+There is also command-line tool 'tamper.py' which can be used to inject/remove evidence using your trained models. For help using this tool, run
 ```
 $python tamper.py -h
 
