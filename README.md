@@ -4,6 +4,8 @@ In this repository you will find a Keras implementation of CT-GAN: A framework f
 *Yisroel Mirsky, Tom Mahler, Ilan Shelef, and Yuval Elovici. CT-GAN: Malicious Tampering of 3D Medical Imagery using Deep Learning. 28th USENIX Security Symposium (USENIX Security 19)*
 
 ([full paper here](https://www.usenix.org/system/files/sec19-mirsky_0.pdf))
+Links to datasets are found below.
+For access to the pretrained models, please reach out to me (contact below). We will only supply the models to verified academic researchers.
 
 **Disclaimer**: This code has been published for research purposes only. It is our hope that with this code, others will be able to better understand this threat and find better ways to mitigate it.
  
