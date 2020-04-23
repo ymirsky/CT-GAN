@@ -235,7 +235,7 @@ Yisroel Mirsky, Tom Mahler, Ilan Shelef, and Yuval Elovici
 # Datasets
 In our research we investigated injection and removal of cancerous lung nodules in CT scans. The scans were obtained from the Cancer Imaging Archive [found here](https://wiki.cancerimagingarchive.net/display/Public/LIDC-IDRI).
 
-In [this link](https://drive.google.com/open?id=1R0WD_5IZ3NlyCiOPf1Ex74nBnZYQegwr) you will find the *tampered* scans which we used in our blind and open experiments. These scans may be helpful if you are researching means for detecting these types of attacks. We also supply labels and our results from our radiologists and the AI.
+In [this link](https://www.kaggle.com/ymirsky/medical-deepfakes-lung-cancer) (Kaggle) you will find the *tampered* scans which we used in our blind and open experiments. These scans may be helpful if you are researching means for detecting these types of attacks. We also supply labels and our results from our radiologists and the AI.
 
 # License
 See the [LICENSE](LICENSE) file for details
